@@ -42,8 +42,9 @@ button + button {
 }
 
 .checkbox-text {
-  font-size:34rpx;
+  font-size:45rpx;
   line-height: 1.2;
+  padding-right: 20rpx;
 }
 
 checkbox-group {
@@ -80,4 +81,35 @@ switch {
 .color-text-red {
   font-weight: bold;
   color: darkred;
+}
+
+.checkbox-color {
+  width: 40rpx !important;
+  height: 40rpx !important;
+  margin: 5rpx;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  outline: 1rpx solid gray;
+  box-shadow: none;
+  font-size: 0.8em;
+  text-align: center;
+  line-height: 1em;
+}
+
+.checkbox-color.checkbox-color-0 {
+  background: red;
+}
+
+.checkbox-color.checkbox-color-1 {
+  background: blue;
+}
+
+.checkbox-color.checkbox-color-2 {
+  background: yellow;
+}
+
+.checkbox-color.checkbox-color-3 {
+  background: green;
 }

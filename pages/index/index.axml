@@ -4,22 +4,23 @@
     <view class="page-section-demo">
 
       <view class="row">
-        <image mode="widthFix" src="../../images/smartwatch.jpg" />
+        <!--<image mode="widthFix" src="../../images/smartwatch.jpg" />-->
+        <image mode="scaleToFill" src={{imageREST}} />
       </view>
 
       <view class="page-section-title">Sizes</view>
       <picker onChange="pickerChange" value="{{index}}" range="{{sizes}}" range-key="name">
         <view class="row">
           <view class="row-title">Sel Size</view>
-          <view class="row-extra">Size Current：{{sizes[index].name}}</view>
+          <view class="row-extra">Size Current：{{sizes[index].name}} - $ {{sizes[index].value}}</view>
         </view>
       </picker>
 
       <view class="page-section-title">Colors</view>
       <checkbox-group onChange="checkBoxChange" name="libs">
         <label a:for="{{colors}}" class="checkbox" key="label-{{index}}">
-          <checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
-          <text class="checkbox-text">{{item.name}}</text>
+          <text class="checkbox-text">$ {{item.value}}</text>
+          <checkbox class="checkbox-color checkbox-color-{{index}}" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
         </label>
       </checkbox-group>
 

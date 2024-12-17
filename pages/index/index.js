@@ -1,10 +1,10 @@
 Page({
   onLoad(query) {
-    console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
     this.setData({
       vBasePrice: this.data.sizes[this.data.index].value,
       vDiscount: this.data.vSwitch ? 0 : 10
     });
+    this.loadImage();
     this.calculate();
   },
 
@@ -43,11 +43,11 @@ Page({
       },
       {
         name: 'Yellow',
-        value: 5
+        value: 30
       },
       {
         name: 'Green',
-        value: 30
+        value: 40
       },
     ],
 
@@ -81,6 +81,7 @@ Page({
         }],
       },
     ],
+    imageREST : 'data:image/png;base64, ',
     index: 0,
     vTotal: 0,
     vBasePrice: 0,
@@ -191,5 +192,31 @@ Page({
     this.setData({
       nodes: nodes
     });
+  },
+
+  loadImage() {
+
+    const task = my.request({
+      url: 'https://httpbin.org/image',
+      method: 'GET',
+      dataType: 'base64',
+      success: function(res) {
+        //console.log(res);
+        //my.alert({content: 'success'});
+      },
+      fail: function(res) {
+        //my.alert({content: 'fail'});
+      },
+      complete: function(res) {
+        my.hideLoading();
+        //my.alert({content: 'complete'});
+      }
+    });
+    task.then((value) => {
+      //console.log(value.data);
+      this.setData({
+        imageREST: this.data.imageREST + value.data
+      })      
+    });    
   }
 });
