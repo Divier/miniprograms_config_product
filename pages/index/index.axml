@@ -4,7 +4,7 @@
     <view class="page-section-demo">
 
       <view class="row">
-        <!--<image mode="widthFix" src="../../images/smartwatch.jpg" />-->
+        <!--<image mode="widthFix" src="../../images/descarga.png" />-->
         <image mode="scaleToFill" src={{imageREST}} />
       </view>
 

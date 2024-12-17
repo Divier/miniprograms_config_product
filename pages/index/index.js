@@ -216,7 +216,12 @@ Page({
       //console.log(value.data);
       this.setData({
         imageREST: this.data.imageREST + value.data
-      })      
-    });    
+      }) 
+    }).catch((err) => {
+      console.error(err);
+      this.setData({
+        imageREST: '../../images/descarga.png'
+      }) 
+    });
   }
 });
