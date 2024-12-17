@@ -1,4 +1,68 @@
+<view class="page">
+  <view class="page-description">Configurador de Productos</view>
+  <view class="page-section">
+    <view class="page-section-demo">
 
-<view>
-  this is a blank page
+      <view class="row">
+        <image mode="widthFix" src="../../images/smartwatch.jpg" />
+      </view>
+
+      <view class="page-section-title">Sizes</view>
+      <picker onChange="pickerChange" value="{{index}}" range="{{sizes}}" range-key="name">
+        <view class="row">
+          <view class="row-title">Sel Size</view>
+          <view class="row-extra">Size Current：{{sizes[index].name}}</view>
+        </view>
+      </picker>
+
+      <view class="page-section-title">Colors</view>
+      <checkbox-group onChange="checkBoxChange" name="libs">
+        <label a:for="{{colors}}" class="checkbox" key="label-{{index}}">
+          <checkbox value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
+          <text class="checkbox-text">{{item.name}}</text>
+        </label>
+      </checkbox-group>
+
+      <view class="page-section-title">Amounts</view>
+      <slider
+        value="1"
+        onChanging="sliderChange"
+        onChange="sliderChange"
+        step="1"
+        min="1"
+        max="10"
+        show-value
+      />
+
+      <view class="row-align-r">
+        <view class="page-section-title">Apply Discount ?</view>
+        <view class="switch-item">
+          <switch checked onChange="switchChange" disabled={{vSwitch}} />
+        </view>
+
+        <view class="page-section-title salto">
+          <block a:for="{{nodes}}" a:for-item="node">
+            <block a:for="{{node.children}}" a:for-item="children">
+              <label a:if="{{ node.id === 0 }}" class="text-v color-text-red">
+                <text>$ {{children.text}}</text>
+                <text>{{vBasePrice}}</text>
+              </label>
+              <label a:if="{{ node.id === 1 }}" class="text-v">
+                <text> + {{children.text}}</text>
+                <text>{{vAdditionalPrice}}</text>
+              </label>
+              <label a:if="{{ node.id === 2 }}" class="text-v">
+                <text> - {{children.text}}</text>
+                <text>{{vDiscount}}%</text>
+              </label>
+              <label a:if="{{ node.id === 3 }}" class="text-v color-text-green">
+                <text>$ {{children.text}}</text>
+                <text>{{vTotal}}</text>
+              </label>
+            </block>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,0 +1,83 @@
+.date-radio {
+  padding: 26rpx;
+}
+
+.date-radio label + label {
+  margin-left: 20rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 0 30rpx;
+}
+
+.row-title {
+  flex: 1;
+  padding-top: 28rpx;
+  padding-bottom: 28rpx;
+  font-size: 34rpx;
+  color: #000;
+}
+
+.row-extra {
+  flex-basis: initial;
+  font-size: 32rpx;
+  color: #888;
+}
+
+.row-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 16rpx;
+}
+
+.checkbox {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+button + button {
+  margin-top: 32rpx;
+}
+
+.checkbox-text {
+  font-size:34rpx;
+  line-height: 1.2;
+}
+
+checkbox-group {
+  margin-top: 20rpx;
+}
+
+.switch-item + .switch-item {
+  margin-top: 20rpx;
+}
+
+switch {
+  margin-top: 30rpx;
+}
+
+.row-align-r {
+  margin-top: 30rpx;
+  text-align: right;
+}
+
+.salto {
+  margin-top: 30rpx;
+}
+
+.text-v {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.color-text-green {
+  font-weight: bold;
+  color: green;
+}
+
+.color-text-red {
+  font-weight: bold;
+  color: darkred;
+}

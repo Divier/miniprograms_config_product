@@ -1,35 +1,195 @@
 Page({
   onLoad(query) {
-    // 页面加载
     console.info(`Page onLoad with query: ${JSON.stringify(query)}`);
+    this.setData({
+      vBasePrice: this.data.sizes[this.data.index].value,
+      vDiscount: this.data.vSwitch ? 0 : 10
+    });
+    this.calculate();
   },
-  onReady() {
-    // 页面加载完成
+
+  data: {
+    sizes: [
+      {
+        name: 'XS',
+        value: 10
+      },
+      {
+        name: 'S',
+        value: 20
+      },
+      {
+        name: 'M',
+        value: 30
+      },
+      {
+        name: 'L',
+        value: 40
+      },
+      {
+        name: 'XL',
+        value: 50
+      }
+    ],
+    colors: [
+      {
+        name: 'Red',
+        value: 10
+      },
+      {
+        name: 'Blue',
+        value: 20,
+        checked: false
+      },
+      {
+        name: 'Yellow',
+        value: 5
+      },
+      {
+        name: 'Green',
+        value: 30
+      },
+    ],
+
+    nodes: [
+      {
+        id: 0,
+        children: [{
+          text: 'BASE PRICE: ',
+          value: 0
+        }],
+      },
+      {
+        id: 1,
+        children: [{
+          text: 'ADDITIONAL PRICE: ',
+          value: 0
+        }],
+      },
+      {
+        id: 2,
+        children: [{
+          text: 'DISCOUNT: ',
+          value: 0
+        }],
+      },
+      {
+        id: 3,
+        children: [{
+          text: 'TOTAL: ',
+          value: 0
+        }],
+      },
+    ],
+    index: 0,
+    vTotal: 0,
+    vBasePrice: 0,
+    vAdditionalPrice: 0,
+    vDiscount: 10,
+    vAmount: 1,
+    vSwitch: true
   },
-  onShow() {
-    // 页面显示
+
+  pickerChange(e) {
+    //console.log(e.detail.value);
+    this.setData({
+      index: e.detail.value
+    });
+    const { value } = this.data.sizes[this.data.index];
+    this.setData({
+      vBasePrice: value
+    });
+    this.calculate();
   },
-  onHide() {
-    // 页面隐藏
+
+  checkBoxChange(e) {
+    //console.log(e.detail.value);
+    let sum = 0;
+    e.detail.value.forEach(value => {
+      sum += value;
+    });
+    //console.log(sum);
+    this.setData({
+      vAdditionalPrice: sum,
+    });
+    this.calculate();
   },
-  onUnload() {
-    // 页面被关闭
+
+  sliderChange(e) {
+    //console.log(this.data.vAmount);
+    this.setData({
+      vAmount: e.detail.value,
+      vSwitch: this.data.vAmount >= 5 ? false : true,
+      vDiscount: this.data.vAmount >= 5 ? 10 : 0
+    });
+    this.calculate();
   },
-  onTitleClick() {
-    // 标题被点击
+
+  switchChange(e) {
+    //console.log(e.detail.value);
+    this.setData({
+      vDiscount: e.detail.value ? 10 : 0
+    });
+    this.calculate();
   },
-  onPullDownRefresh() {
-    // 页面被下拉
+
+  calculate() {
+    //console.log(e.detail.value);
+    this.setData({
+      vTotal: (this.data.vBasePrice + this.data.vAdditionalPrice)
+    });
+
+    if (this.data.vAmount > 1) {
+      this.setData({
+        vTotal: (this.data.vTotal * this.data.vAmount)
+      });
+    }
+
+    if (this.data.vDiscount > 0) {
+      this.setData({
+        vTotal: this.data.vTotal - ((this.data.vTotal * this.data.vDiscount) / 100)
+      });
+    }
+    this.showInfo();
   },
-  onReachBottom() {
-    // 页面被拉到底部
-  },
-  onShareAppMessage() {
-    // 返回自定义分享信息
-    return {
-      title: 'My App',
-      desc: 'My App description',
-      path: 'pages/index/index',
-    };
-  },
+
+  showInfo() {
+    //console.log([...this.data.nodes]);
+    const nodes = this.data.nodes.map((node) => {
+      const { id, children } = node;
+      const childrens = children.map((ch) => {
+        const { value } = ch;
+
+        let exit;
+        if (id === 0) {
+          exit = value + this.data.vBasePrice;
+        }
+        if (id === 1) {
+          exit = value + this.data.vAdditionalPrice;
+        }
+        if (id === 2) {
+          exit = value + this.data.vDiscount;
+        }
+        if (id === 3) {
+          exit = value + this.data.vTotal;
+        }
+        //console.log(text);
+        return {
+          ...ch,
+          //text : text + (value + _val)
+          value: exit
+        }
+      });
+      //console.log(childrens);
+      return {
+        ...node,
+        children: childrens
+      }
+    });
+
+    //console.log(nodes);
+    this.setData({
+      nodes: nodes
+    });
+  }
 });
