@@ -61,7 +61,7 @@
               </label>
               <label a:if="{{ node.id === 2 }}" class="text-v">
                 <text> - {{children.text}}</text>
-                <text>{{children.value}}%</text>
+                <text>{{children.value}} %</text>
               </label>
               <label a:if="{{ node.id === 3 }}" class="text-v color-text-green">
                 <text>$ {{children.text}}</text>
