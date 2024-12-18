@@ -2,7 +2,7 @@
   padding: 26rpx;
 }
 
-.date-radio label + label {
+.date-radio label+label {
   margin-left: 20rpx;
 }
 
@@ -37,12 +37,12 @@
   margin-bottom: 20rpx;
 }
 
-button + button {
+button+button {
   margin-top: 32rpx;
 }
 
 .checkbox-text {
-  font-size:45rpx;
+  font-size: 45rpx;
   line-height: 1.2;
   padding-right: 20rpx;
 }
@@ -51,7 +51,7 @@ checkbox-group {
   margin-top: 20rpx;
 }
 
-.switch-item + .switch-item {
+.switch-item+.switch-item {
   margin-top: 20rpx;
 }
 

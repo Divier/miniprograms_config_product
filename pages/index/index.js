@@ -81,7 +81,7 @@ Page({
         }],
       },
     ],
-    imageREST : 'data:image/png;base64, ',
+    imageREST: 'data:image/png;base64, ',
     index: 0,
     vTotal: 0,
     vBasePrice: 0,
@@ -105,13 +105,14 @@ Page({
 
   checkBoxChange(e) {
     //console.log(e.detail.value);
-    let sum = 0;
-    e.detail.value.forEach(value => {
-      sum += value;
-    });
-    //console.log(sum);
+    const initialValue = 0;
+    const sumWithInitial = e.detail.value.reduce(
+      (accumulator, currentValue) => accumulator + currentValue,
+      initialValue,
+    );
+
     this.setData({
-      vAdditionalPrice: sum,
+      vAdditionalPrice: sumWithInitial,
     });
     this.calculate();
   },
@@ -159,25 +160,21 @@ Page({
     const nodes = this.data.nodes.map((node) => {
       const { id, children } = node;
       const childrens = children.map((ch) => {
-        const { value } = ch;
-
-        let exit;
+        let exit = 0;
         if (id === 0) {
-          exit = value + this.data.vBasePrice;
+          exit = this.data.vBasePrice;
         }
         if (id === 1) {
-          exit = value + this.data.vAdditionalPrice;
+          exit = this.data.vAdditionalPrice;
         }
         if (id === 2) {
-          exit = value + this.data.vDiscount;
+          exit = this.data.vDiscount;
         }
         if (id === 3) {
-          exit = value + this.data.vTotal;
+          exit = this.data.vTotal;
         }
-        //console.log(text);
         return {
           ...ch,
-          //text : text + (value + _val)
           value: exit
         }
       });
@@ -187,7 +184,6 @@ Page({
         children: childrens
       }
     });
-
     //console.log(nodes);
     this.setData({
       nodes: nodes
@@ -200,14 +196,14 @@ Page({
       url: 'https://httpbin.org/image',
       method: 'GET',
       dataType: 'base64',
-      success: function(res) {
+      success: function (res) {
         //console.log(res);
         //my.alert({content: 'success'});
       },
-      fail: function(res) {
+      fail: function (res) {
         //my.alert({content: 'fail'});
       },
-      complete: function(res) {
+      complete: function (res) {
         my.hideLoading();
         //my.alert({content: 'complete'});
       }
@@ -216,12 +212,12 @@ Page({
       //console.log(value.data);
       this.setData({
         imageREST: this.data.imageREST + value.data
-      }) 
+      })
     }).catch((err) => {
       console.error(err);
       this.setData({
         imageREST: '../../images/descarga.png'
-      }) 
+      })
     });
   }
 });

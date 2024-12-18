@@ -12,7 +12,9 @@
       <picker onChange="pickerChange" value="{{index}}" range="{{sizes}}" range-key="name">
         <view class="row">
           <view class="row-title">Sel Size</view>
-          <view class="row-extra">Size Current：{{sizes[index].name}} - $ {{sizes[index].value}}</view>
+          <view class="row-extra">
+            Size Current：{{sizes[index].name}} - $ {{sizes[index].value}}
+          </view>
         </view>
       </picker>
 
@@ -20,7 +22,12 @@
       <checkbox-group onChange="checkBoxChange" name="libs">
         <label a:for="{{colors}}" class="checkbox" key="label-{{index}}">
           <text class="checkbox-text">$ {{item.value}}</text>
-          <checkbox class="checkbox-color checkbox-color-{{index}}" value="{{item.value}}" checked="{{item.checked}}" disabled="{{item.disabled}}" />
+          <checkbox
+            class="checkbox-color checkbox-color-{{index}}"
+            value="{{item.value}}"
+            checked="{{item.checked}}"
+            disabled="{{item.disabled}}"
+          />
         </label>
       </checkbox-group>
 
@@ -46,19 +53,19 @@
             <block a:for="{{node.children}}" a:for-item="children">
               <label a:if="{{ node.id === 0 }}" class="text-v color-text-red">
                 <text>$ {{children.text}}</text>
-                <text>{{vBasePrice}}</text>
+                <text>{{children.value}}</text>
               </label>
               <label a:if="{{ node.id === 1 }}" class="text-v">
                 <text> + {{children.text}}</text>
-                <text>{{vAdditionalPrice}}</text>
+                <text>{{children.value}}</text>
               </label>
               <label a:if="{{ node.id === 2 }}" class="text-v">
                 <text> - {{children.text}}</text>
-                <text>{{vDiscount}}%</text>
+                <text>{{children.value}}%</text>
               </label>
               <label a:if="{{ node.id === 3 }}" class="text-v color-text-green">
                 <text>$ {{children.text}}</text>
-                <text>{{vTotal}}</text>
+                <text>{{children.value}}</text>
               </label>
             </block>
           </block>
